@@ -1,0 +1,12 @@
+{
+  "name": "pureglow-solutions-site",
+  "version": "2.0.0",
+  "private": true,
+  "description": "PureGlow Solutions storefront with Render backend, Paystack payments, customer accounts and WhatsApp order handoff.",
+  "scripts": {"start": "node server.js"},
+  "engines": {"node": ">=18"},
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  }
+}

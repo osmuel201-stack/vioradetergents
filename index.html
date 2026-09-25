@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PureGlow Solutions | Viora Home Care Products</title>
+<meta name="description" content="Shop Viora home-care products from PureGlow Solutions — dishwashing liquid, fabric softener, floor cleaner and more. Made in Ghana, delivered in Cape Coast.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="announcement">PureGlow Solutions • Uniquely formulated cleaning products • Proudly Ghanaian</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+    <a class="brand" href="#home" aria-label="PureGlow Solutions home">
+      <img src="assets/logo.png" alt="PureGlow Solutions logo">
+      <span>PureGlow <b>Solutions</b></span>
+    </a>
+    <nav id="mainNav">
+      <a href="#shop">Shop</a>
+      <a href="#categories">Categories</a>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" id="searchToggle" aria-label="Search">⌕</button>
+      <button class="account-btn" id="accountOpen" aria-label="Customer account"><span id="accountButtonText">Sign up / Log in</span></button>
+      <button class="cart-btn" id="cartOpen" aria-label="Open cart">
+        <span>Cart</span><em id="cartCount">0</em>
+      </button>
+    </div>
+  </div>
+  <div class="search-bar" id="searchBar">
+    <input id="searchInput" type="search" placeholder="Search dishwashing soap, floor cleaner, fabric softener...">
+  </div>
+</header>
+
+<main id="home">
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">PUREGLOW SOLUTIONS • CAPE COAST, GHANA</span>
+    <h1>Make every cleaning count.<br><span>Pure. Fresh. Effective.</span></h1>
+    <p>Cleaning products with unique formulations designed to deliver more than ordinary cleaning — for households and institutions.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#shop">Shop products</a>
+      <a class="btn btn-light" href="#about">Our story</a>
+    </div>
+    <div class="trust-row">
+      <span>✓ Ghanaian brand</span><span>✓ Home-care essentials</span><span>✓ Secure Paystack checkout</span>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card hero-card-main"><img src="assets/hero-main.jpg" alt="Full Viora product range from PureGlow Solutions"></div>
+    <div class="hero-card hero-card-small hero-slideshow" id="heroSlideshow">
+      <div class="hero-slide is-active">
+        <img src="assets/hero-small.jpg" alt="Viora dishwashing liquid soap bottle">
+        <strong>Viora Dishwashing Liquid</strong>
+      </div>
+      <div class="hero-slide">
+        <img src="assets/dish-5l-a.jpg" alt="Viora dishwashing liquid soap, 5 litre jerrycans">
+        <strong>Viora Dishwashing Liquid — 5L</strong>
+      </div>
+      <div class="hero-slide">
+        <img src="assets/floor-cleaner-5l.jpg" alt="Viora floor cleaner, 5 litres">
+        <strong>Viora Floor Cleaner — 5L</strong>
+      </div>
+      <div class="hero-slide">
+        <img src="assets/fabric-softener-group.jpg" alt="Viora fabric softener bottles">
+        <strong>Viora Fabric Softener</strong>
+      </div>
+      <div class="hero-slide bleach-slide">
+        <img src="assets/bleach-500-group.jpg" alt="Viora Thick Bleach 500ml bottles">
+        <strong>Viora Thick Bleach — 500ml <em>Price to be added</em></strong>
+      </div>
+      <div class="hero-slide bleach-slide">
+        <img src="assets/bleach-1l-group.jpg" alt="Viora Thick Perfumed Bleach 1L bottles">
+        <strong>Viora Thick Perfumed Bleach — 1L <em>GHS 20.00</em></strong>
+      </div>
+      <div class="hero-slideshow-dots" id="heroSlideshowDots">
+        <span class="is-active"></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <div class="glow"></div>
+  </div>
+</section>
+
+<section class="category-strip" id="categories">
+  <div class="section-heading compact">
+    <span class="eyebrow">SHOP BY CATEGORY</span>
+    <h2>Find what you need</h2>
+  </div>
+  <div class="category-grid">
+    <button class="category-card active" data-category="All"><span>✦</span><b>All products</b><small>View the collection</small></button>
+    <button class="category-card" data-category="Dishwashing"><span>◒</span><b>Dishwashing</b><small>For everyday dishes</small></button>
+    <button class="category-card" data-category="Fabric Care"><span>✿</span><b>Fabric care</b><small>Soft, fresh laundry</small></button>
+    <button class="category-card" data-category="Home Care"><span>⌂</span><b>Home care</b><small>Clean floors & spaces</small></button>
+    <button class="category-card" data-category="Bulk"><span>▣</span><b>Bulk sizes</b><small>For homes & businesses</small></button>
+  </div>
+</section>
+
+<section class="shop-section" id="shop">
+  <div class="section-heading">
+    <div><span class="eyebrow">THE COLLECTION</span><h2>Viora home care</h2></div>
+    <div class="shop-tools">
+      <span id="resultCount"></span>
+      <select id="sortSelect" aria-label="Sort products">
+        <option value="default">Featured</option>
+        <option value="name">Name A–Z</option>
+        <option value="category">Category</option>
+      </select>
+    </div>
+  </div>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<section class="feature-banner">
+  <div class="feature-image"><img src="assets/dish-450-lifestyle.jpg" alt="Viora dishwashing liquid soap range"></div>
+  <div class="feature-copy">
+    <span class="eyebrow">OUR PURPOSE</span>
+    <h2>More than ordinary cleaning.</h2>
+    <p>At PureGlow Solutions, our goal is to make every cleaning count with product lines that combine effective cleaning with added properties to deliver value.</p>
+    <a class="text-link" href="#shop">Explore the collection →</a>
+  </div>
+</section>
+
+<section class="gallery-section" id="gallery">
+  <div class="section-heading compact">
+    <span class="eyebrow">PUREGLOW IN FOCUS</span>
+    <h2>Our products & brand</h2>
+    <p class="gallery-intro">Explore PureGlow Solutions and Viora images from our product collection and brand materials.</p>
+  </div>
+  <div class="gallery-grid">
+    <figure><img src="assets/dish-450-orange.jpg" alt="Viora dishwashing liquid soap, orange" loading="lazy"><figcaption>Dishwashing liquid — orange</figcaption></figure>
+    <figure><img src="assets/fabric-softener-solo-pink.jpg" alt="Viora fabric softener bottle" loading="lazy"><figcaption>Viora fabric softener</figcaption></figure>
+    <figure><img src="assets/dish-450-yellow.jpg" alt="Viora dishwashing liquid soap, yellow" loading="lazy"><figcaption>Dishwashing liquid — yellow</figcaption></figure>
+    <figure><img src="assets/dish-450-woman-green.jpg" alt="Viora dishwashing liquid soap, green" loading="lazy"><figcaption>Dishwashing liquid — green</figcaption></figure>
+    <figure><img src="assets/dish-5l-a.jpg" alt="Viora dishwashing liquid soap, 5 litre jerrycans" loading="lazy"><figcaption>Bulk 5L jerrycans</figcaption></figure>
+    <figure><img src="assets/team-lineup.jpg" alt="PureGlow product lineup" loading="lazy"><figcaption>PureGlow in focus</figcaption></figure>
+    <figure><img src="assets/pureglow-customer-gallery.jpg" alt="Viora dishwashing liquid products in a bright home setting" loading="lazy"><figcaption>Viora home-care range</figcaption></figure>
+    <figure><img src="assets/hero-main.jpg" alt="Full Viora product range" loading="lazy"><figcaption>Viora collection</figcaption></figure>
+    <figure><img src="assets/dish-5l-b.jpg" alt="Viora dishwashing liquid soap bulk" loading="lazy"><figcaption>Bulk range</figcaption></figure>
+    <figure><img src="assets/retail-shelf.jpg" alt="Viora products on a retail shelf" loading="lazy"><figcaption>On the shelf</figcaption></figure>
+    <figure><img src="assets/floor-cleaner-5l.jpg" alt="Viora floor cleaner, 5 litres" loading="lazy"><figcaption>Floor cleaner</figcaption></figure>
+    <figure><img src="assets/fabric-softener-group.jpg" alt="Viora fabric softener bottles" loading="lazy"><figcaption>Fabric softener range</figcaption></figure>
+    <figure><img src="assets/bleach-500-group.jpg" alt="Viora Thick Bleach 500ml bottles" loading="lazy"><figcaption>Viora Thick Bleach — 500ml</figcaption></figure>
+    <figure><img src="assets/bleach-1l-group.jpg" alt="Viora Thick Perfumed Bleach 1L bottles" loading="lazy"><figcaption>Viora Thick Perfumed Bleach — 1L</figcaption></figure>
+  </div>
+</section>
+
+<section class="about-section" id="about">
+  <div class="section-heading compact">
+    <span class="eyebrow">ABOUT PUREGLOW SOLUTIONS</span>
+    <h2>Cleaner, fresher, healthier spaces.</h2>
+  </div>
+  <div class="about-copy-grid">
+    <article class="about-main">
+      <p>At PureGlow Solutions, our goal is to make every cleaning count with our product lines that combine effective cleaning with added properties to deliver value, helping households and institutions create cleaner, fresher and healthier spaces.</p>
+    </article>
+    <article class="vision-card"><span class="eyebrow">VISION</span><h3>Leading through unique formulations.</h3><p>To be the leading manufacturer of uniquely formulated detergents in Ghana and beyond.</p></article>
+    <article class="mission-card"><span class="eyebrow">MISSION</span><h3>More than ordinary cleaning.</h3><p>Developing cleaning products with unique formulations designed to deliver more than ordinary cleaning.</p></article>
+  </div>
+  <div class="benefits">
+    <article><div class="benefit-icon">✦</div><h3>Effective cleaning</h3><p>Product lines created around everyday cleaning needs for households and institutions.</p></article>
+    <article><div class="benefit-icon">◌</div><h3>Added value</h3><p>Our goal is to combine effective cleaning with added properties that deliver value.</p></article>
+    <article><div class="benefit-icon">✓</div><h3>Made in Ghana</h3><p>PureGlow Solutions is based in Kakumdo, Cape Coast, serving customers in Ghana and beyond.</p></article>
+  </div>
+</section>
+
+<section class="newsletter contact-section" id="contact">
+  <div>
+    <span class="eyebrow">CONTACT PUREGLOW</span>
+    <h2>Order, ask a question or reach us directly.</h2>
+    <p class="contact-lead">Kakumdo, Cape Coast · CC-115-6047</p>
+  </div>
+  <div class="contact-details">
+    <a href="tel:0597601733"><strong>Call</strong><span>0597601733</span></a>
+    <a href="https://wa.me/233597601733" target="_blank" rel="noopener"><strong>WhatsApp</strong><span>0597601733</span></a>
+    <a href="mailto:Pureglowsoltions25@gmail.com"><strong>Email</strong><span>Pureglowsoltions25@gmail.com</span></a>
+    <div><strong>MoMo</strong><span>0597601733</span></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand"><img src="assets/logo.png" alt="PureGlow Solutions logo"><h3>PureGlow Solutions</h3><p>Uniquely formulated cleaning products designed to deliver more than ordinary cleaning.</p></div>
+    <div><h4>Shop</h4><a href="#shop">All products</a><a href="#categories">Categories</a><a href="#shop">Bulk sizes</a></div>
+    <div><h4>Company</h4><a href="#about">About us</a><a href="#gallery">Product gallery</a><a href="#contact">Contact</a></div>
+    <div><h4>Support</h4><p>Call or WhatsApp: 0597601733</p><a href="mailto:Pureglowsoltions25@gmail.com">Pureglowsoltions25@gmail.com</a></div>
+    <div class="social-links">
+      <h4>Follow PureGlow</h4>
+      <a href="https://www.linkedin.com/company/pureglow-solutions/" target="_blank" rel="noopener noreferrer" aria-label="PureGlow Solutions on LinkedIn">LinkedIn</a>
+      <a href="https://www.instagram.com/pureglowsolutionsgh/" target="_blank" rel="noopener noreferrer" aria-label="PureGlow Solutions on Instagram">Instagram · @pureglowsolutionsgh</a>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 PureGlow Solutions</span><span>PureGlow Solutions • Cape Coast, Ghana</span></div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="drawer-head"><div><span class="eyebrow">YOUR CART</span><h2>Shopping cart</h2></div><button class="close-btn" id="cartClose">×</button></div>
+  <div id="cartItems" class="cart-items"></div>
+  <div class="cart-footer">
+    <div class="total-row"><span>Subtotal</span><strong id="cartTotal">GHS 0.00</strong></div>
+    <div class="total-row fee-row"><span>Payment fee (1.95%)</span><strong id="cartFee">GHS 0.00</strong></div>
+    <div class="total-row grand-total"><span>Total to pay</span><strong id="cartGrandTotal">GHS 0.00</strong></div>
+    <button class="btn btn-primary full" id="checkoutBtn">Continue to checkout</button>
+    <small>Secure checkout powered by Paystack.</small>
+  </div>
+</aside>
+
+<div class="modal" id="productModal">
+  <button class="modal-close" id="modalClose">×</button>
+  <div id="modalContent"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="account-modal" id="accountModal" aria-hidden="true">
+  <div class="account-panel">
+    <button class="account-close" id="accountClose" aria-label="Close account">×</button>
+    <div id="accountAuthView">
+      <div class="account-header">
+        <span class="eyebrow">PUREGLOW CUSTOMER ACCOUNT</span>
+        <h2>Shop faster with your account.</h2>
+        <p>Create an account to save your details for checkout. You can still shop and pay as a guest.</p>
+      </div>
+      <div class="account-tabs">
+        <button type="button" class="account-tab active" data-account-tab="login">Log in</button>
+        <button type="button" class="account-tab" data-account-tab="signup">Create account</button>
+      </div>
+      <form id="loginForm" class="account-form">
+        <label>Email address<input id="loginEmail" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+        <label>Password<input id="loginPassword" type="password" autocomplete="current-password" placeholder="Your password" required></label>
+        <p class="account-error" id="loginError" role="alert"></p>
+        <button class="btn btn-primary full" type="submit">Log in</button>
+      </form>
+      <form id="signupForm" class="account-form" hidden>
+        <label>Full name<input id="signupName" type="text" autocomplete="name" placeholder="Your full name" required></label>
+        <label>Email address<input id="signupEmail" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+        <label>Ghana phone number<input id="signupPhone" type="tel" autocomplete="tel" placeholder="024 XXX XXXX" required></label>
+        <label>Password<input id="signupPassword" type="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8" required></label>
+        <label>Confirm password<input id="signupPassword2" type="password" autocomplete="new-password" placeholder="Enter your password again" minlength="8" required></label>
+        <p class="account-error" id="signupError" role="alert"></p>
+        <button class="btn btn-primary full" type="submit">Create my account</button>
+      </form>
+      <small class="account-note">Your password is securely hashed on the server. We never store your plain-text password.</small>
+    </div>
+    <div id="accountDashboard" hidden>
+      <div class="account-header">
+        <span class="eyebrow">MY ACCOUNT</span>
+        <h2 id="accountWelcome">Welcome back.</h2>
+        <p>Your saved customer details will be available automatically at checkout.</p>
+      </div>
+      <div class="account-card">
+        <div><span>Name</span><strong id="accountName">—</strong></div>
+        <div><span>Email</span><strong id="accountEmail">—</strong></div>
+        <div><span>Phone</span><strong id="accountPhone">—</strong></div>
+      </div>
+      <button class="btn btn-primary full" type="button" id="accountShopBtn">Continue shopping</button>
+      <button class="btn btn-light full" type="button" id="accountLogoutBtn" style="margin-top:10px;">Log out</button>
+    </div>
+  </div>
+</div>
+
+<div class="checkout-modal" id="checkoutModal" aria-hidden="true">
+  <div class="checkout-panel">
+    <button class="checkout-close" id="checkoutClose" aria-label="Close checkout">×</button>
+    <div class="checkout-header">
+      <span class="eyebrow">SECURE CHECKOUT</span>
+      <h2>Complete your order</h2>
+      <p>Your details are used to process your PureGlow payment through Paystack.</p>
+    </div>
+    <div class="checkout-layout">
+      <form id="checkoutForm" class="checkout-form">
+        <label>Full name<input id="customerName" name="name" type="text" autocomplete="name" placeholder="Your full name" required></label>
+        <label>Email address<input id="customerEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+        <label>WhatsApp / phone number<input id="customerPhone" name="phone" type="tel" autocomplete="tel" placeholder="024 XXX XXXX" required></label>
+        <fieldset class="delivery-options"><legend>Order fulfilment</legend>
+          <label class="radio-row"><input type="radio" name="deliveryMethod" value="collection" checked><span><b>Collection</b><small>PureGlow Solutions, Kakumdo, Cape Coast</small></span></label>
+          <label class="radio-row"><input type="radio" name="deliveryMethod" value="cape-coast-delivery"><span><b>Cape Coast delivery</b><small>Provide the location where you want your order delivered.</small></span></label>
+        </fieldset>
+        <div id="deliveryFields" class="delivery-fields" hidden>
+          <label>Delivery area<input id="deliveryArea" type="text" placeholder="e.g. Abura, Pedu, Kotokuraba"></label>
+          <label>Delivery address / location<input id="deliveryAddress" type="text" placeholder="House, street or location"></label>
+          <label>Landmark (optional)<input id="deliveryLandmark" type="text" placeholder="Nearby landmark"></label>
+          <label>Google Maps location link (optional)<input id="deliveryMapLink" type="url" placeholder="Paste your Google Maps pin/link"></label>
+        </div>
+        <div class="checkout-note"><span>✓</span><div><b>Secure payment</b><small>Payment is initialized on the PureGlow server and completed through Paystack. Your MoMo PIN is never sent to PureGlow.</small></div></div>
+        <button class="btn btn-primary full checkout-submit" type="submit">Pay <span id="checkoutAmount">GHS 0.00</span></button>
+      </form>
+      <aside class="checkout-summary">
+        <span class="summary-label">ORDER SUMMARY</span>
+        <div id="checkoutSummaryItems"></div>
+        <div class="summary-breakdown">
+          <div><span>Products</span><strong id="checkoutSummarySubtotal">GHS 0.00</strong></div>
+          <div><span>Payment fee (1.95%)</span><strong id="checkoutSummaryFee">GHS 0.00</strong></div>
+        </div>
+        <div class="summary-total"><span>Total to pay</span><strong id="checkoutSummaryTotal">GHS 0.00</strong></div>
+      </aside>
+    </div>
+  </div>
+</div>
+<script src="https://js.paystack.co/v2/inline.js"></script>
+<script>
+const PAYSTACK_PUBLIC_KEY = "pk_live_30fbefd95814769ed3344919d15d4549afeb4d14";
+const API_BASE_URL = ''; // Render serves the frontend and /api/* from the same origin.
+const PRODUCTS = [
+  {"id":"viora-dish-450-yellow","groupId":"dish-450","name":"Viora Dishwashing Liquid Soap","variant":"450ml","colorLabel":"Yellow","category":"Dishwashing","price":13,"image":"assets/dish-450-yellow.jpg"},
+  {"id":"viora-dish-450-green","groupId":"dish-450","name":"Viora Dishwashing Liquid Soap","variant":"450ml","colorLabel":"Green","category":"Dishwashing","price":13,"image":"assets/hero-small.jpg"},
+  {"id":"viora-dish-450-orange","groupId":"dish-450","name":"Viora Dishwashing Liquid Soap","variant":"450ml","colorLabel":"Orange","category":"Dishwashing","price":13,"image":"assets/dish-450-orange.jpg"},
+  {"id":"viora-dish-5l","name":"Viora Dishwashing Liquid Soap","variant":"5 Litres","category":"Bulk","categories":["Dishwashing","Bulk"],"price":65,"image":"assets/dish-5l-a.jpg"},
+  {"id":"viora-fabric-500-blue","groupId":"fabric-500","name":"Viora Fabric Softener","variant":"500ml","colorLabel":"Blue","category":"Fabric Care","price":20,"image":"assets/fabric-softener-solo-blue.jpg"},
+  {"id":"viora-fabric-500-pink","groupId":"fabric-500","name":"Viora Fabric Softener","variant":"500ml","colorLabel":"Pink","category":"Fabric Care","price":20,"image":"assets/fabric-softener-solo-pink.jpg"},
+  {"id":"viora-bleach-500","name":"Viora Thick Bleach","variant":"500ml","category":"Home Care","price":null,"image":"assets/bleach-500-solo.jpg"},
+  {"id":"viora-bleach-1l","name":"Viora Thick Perfumed Bleach","variant":"1 Litre","category":"Home Care","price":20,"image":"assets/bleach-1l-solo.jpg"},
+  {"id":"viora-floor-5l","name":"Viora Floor Cleaner","variant":"5 Litres","category":"Home Care","price":75,"image":"assets/floor-cleaner-5l.jpg"}
+];
+let cart = JSON.parse(localStorage.getItem('pureglow-cart') || '[]');
+// Guard against a cart saved before a catalogue change (e.g. a product id
+// that no longer exists) — silently drop unknown items instead of crashing.
+cart = cart.filter(item => PRODUCTS.some(p => p.id === item.id));
+let activeCategory = 'All';
+let query = '';
+
+const grid = document.getElementById('productGrid');
+const count = document.getElementById('resultCount');
+const toast = document.getElementById('toast');
+
+function money(v){ return v == null ? 'Price to be added' : `GHS ${Number(v).toFixed(2)}`; }
+function productImage(p){ return p.image || 'assets/logo.png'; }
+
+function filteredProducts(){
+  let list = PRODUCTS.filter(p => activeCategory === 'All' || (p.categories ? p.categories.includes(activeCategory) : p.category === activeCategory));
+  const showColors = activeCategory !== 'All';
+  if(!showColors){
+    const seen = new Set();
+    list = list.filter(p => {
+      const key = p.groupId || p.id;
+      if(seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+  if(query) list = list.filter(p => `${p.name} ${p.variant} ${p.colorLabel||''} ${p.category}`.toLowerCase().includes(query.toLowerCase()));
+  const sort = document.getElementById('sortSelect').value;
+  if(sort === 'name') list.sort((a,b)=>a.name.localeCompare(b.name));
+  if(sort === 'category') list.sort((a,b)=>a.category.localeCompare(b.category));
+  return list.map(p => ({...p, __showColor: showColors && !!p.colorLabel}));
+}
+
+function renderProducts(){
+  const list = filteredProducts();
+  count.textContent = `${list.length} product${list.length===1?'':'s'}`;
+  grid.innerHTML = list.map(p => `
+    <article class="product-card">
+      <button class="product-image ${p.image?'':'no-photo'}" onclick="openProduct('${p.id}')" aria-label="View ${p.name}">
+        <img src="${productImage(p)}" alt="${p.name} ${p.variant}" loading="lazy">
+        <span class="quick-view">Quick view</span>
+      </button>
+      <div class="product-info">
+        <small>${p.category}</small>
+        <h3>${p.name}</h3>
+        <p>${p.variant}${p.__showColor ? ' · ' + p.colorLabel : ''}</p>
+        <div class="product-bottom">
+          <strong>${money(p.price)}</strong>
+          ${p.price==null
+            ? `<button class="add-btn" disabled title="Price coming soon">Coming soon</button>`
+            : `<button class="add-btn" onclick="addToCart('${p.id}')">Add</button>`}
+        </div>
+      </div>
+    </article>`).join('');
+}
+
+function saveCart(){ localStorage.setItem('pureglow-cart', JSON.stringify(cart)); renderCart(); }
+
+function addToCart(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p){ showToast('That item is no longer available.'); return; }
+  if(p.price==null){ showToast('This product is not available for purchase yet.'); return; }
+  const item = cart.find(x=>x.id===id);
+  if(item) item.qty++;
+  else cart.push({id,qty:1});
+  saveCart();
+  showToast(`${p.name} added to your cart`);
+}
+
+function renderCart(){
+  const box = document.getElementById('cartItems');
+  let total = 0, qty = 0;
+  // Drop any cart line whose product no longer exists in the catalogue
+  // (e.g. after a product was renamed/removed) instead of crashing.
+  cart = cart.filter(item => PRODUCTS.some(p => p.id === item.id));
+  if(!cart.length){
+    box.innerHTML = `<div class="empty-cart"><div>🛍</div><h3>Your cart is empty</h3><p>Add a PureGlow product to get started.</p><a class="text-link" href="#shop" onclick="closeCart()">Browse products →</a></div>`;
+  } else {
+    box.innerHTML = cart.map(item=>{
+      const p=PRODUCTS.find(x=>x.id===item.id);
+      qty += item.qty;
+      if(p.price != null) total += p.price * item.qty;
+      return `<div class="cart-item">
+        <img src="${productImage(p)}" alt="">
+        <div><b>${p.name}</b><small>${p.variant}${p.colorLabel?' · '+p.colorLabel:''}</small><div class="qty"><button onclick="changeQty('${p.id}',-1)">−</button><span>${item.qty}</span><button onclick="changeQty('${p.id}',1)">+</button></div></div>
+        <div class="cart-item-end"><strong>${p.price==null?'—':money(p.price*item.qty)}</strong><button class="remove-item" type="button" onclick="removeFromCart('${p.id}')" aria-label="Remove ${p.name} from cart">Remove</button></div>
+      </div>`;
+    }).join('');
+  }
+  document.getElementById('cartCount').textContent = qty;
+  const gross = paystackGross(total);
+  document.getElementById('cartTotal').textContent = money(total);
+  document.getElementById('cartFee').textContent = money(gross - total);
+  document.getElementById('cartGrandTotal').textContent = money(gross);
+}
+
+function changeQty(id,delta){
+  const item=cart.find(x=>x.id===id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty<=0){ cart=cart.filter(x=>x.id!==id); showToast('Item removed from your cart'); }
+  saveCart();
+}
+
+function removeFromCart(id){
+  const item=cart.find(x=>x.id===id);
+  if(!item) return;
+  const p=PRODUCTS.find(x=>x.id===id);
+  cart=cart.filter(x=>x.id!==id);
+  saveCart();
+  showToast(`${p?.name || 'Item'} removed from your cart`);
+}
+
+function openCart(){ document.getElementById('cartDrawer').classList.add('open'); document.getElementById('overlay').classList.add('show'); }
+function closeCart(){ document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('overlay').classList.remove('show'); }
+function openProduct(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  const addBtn = p.price==null
+    ? `<button class="btn btn-primary full" disabled>Price coming soon</button>`
+    : `<button class="btn btn-primary full" onclick="addToCart('${p.id}'); closeModal();">Add to cart</button>`;
+  document.getElementById('modalContent').innerHTML = `<div class="modal-image"><img src="${productImage(p)}" alt="${p.name}"></div><div class="modal-copy"><small>${p.category}</small><h2>${p.name}</h2><p class="variant">${p.variant}${p.colorLabel?' · '+p.colorLabel:''}</p><div class="modal-price">${money(p.price)}</div><p>Product details shown here are from the current PureGlow Solutions catalogue.</p>${addBtn}</div>`;
+  document.getElementById('productModal').classList.add('show');
+  document.getElementById('overlay').classList.add('show');
+}
+function closeModal(){ document.getElementById('productModal').classList.remove('show'); document.getElementById('overlay').classList.remove('show'); }
+function showToast(msg){ toast.textContent=msg; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),1800); }
+
+document.getElementById('cartOpen').onclick=openCart;
+document.getElementById('cartClose').onclick=closeCart;
+document.getElementById('modalClose').onclick=closeModal;
+document.getElementById('overlay').onclick=()=>{closeCart();closeModal();};
+document.getElementById('sortSelect').onchange=renderProducts;
+document.getElementById('searchToggle').onclick=()=>document.getElementById('searchBar').classList.toggle('open');
+document.getElementById('searchInput').oninput=e=>{query=e.target.value;renderProducts();};
+document.getElementById('mobileMenu').onclick=()=>document.getElementById('mainNav').classList.toggle('open');
+function cartTotal(){ return cart.reduce((sum,item)=>{ const p=PRODUCTS.find(x=>x.id===item.id); return sum + (p ? p.price*item.qty : 0); },0); }
+
+// Paystack's current Ghana local transaction fee is 1.95%.
+// The customer pays the grossed-up amount so the product subtotal is protected from the fee.
+const PAYSTACK_FEE_RATE = 0.0195;
+const PUREGLOW_WHATSAPP = '233597601733'; // 0597 601 733 in international format, no leading 0/+
+let pendingOrder = null;
+let lastPaymentResult = null;
+
+function paystackGross(net){
+  if(net <= 0) return 0;
+  return Math.round(((net / (1 - PAYSTACK_FEE_RATE)) + 0.01) * 100) / 100;
+}
+
+function buildWhatsAppOrderMessage(order, result){
+  const lines = [];
+  lines.push('🧼 *New PureGlow Solutions order — Paid*');
+  lines.push(`Ref: ${result.reference}`);
+  lines.push('');
+  lines.push(`*Customer:* ${order.name}`);
+  lines.push(`*Phone:* ${order.phone}`);
+  lines.push(`*Email:* ${order.email}`);
+  lines.push('');
+  if(order.method === 'cape-coast-delivery'){
+    lines.push('*Fulfilment:* Cape Coast delivery');
+    lines.push(`*Area:* ${order.area}`);
+    lines.push(`*Address:* ${order.address}`);
+    if(order.landmark) lines.push(`*Landmark:* ${order.landmark}`);
+    if(order.mapLink) lines.push(`*Google Maps:* ${order.mapLink}`);
+    lines.push('Please use this delivery location for the order. If needed, I can also share my live WhatsApp location.');
+  } else {
+    lines.push('*Fulfilment:* Pickup — PureGlow Solutions, Kakumdo, Cape Coast');
+  }
+  lines.push('');
+  lines.push('*Items:*');
+  order.items.forEach(i=>{
+    lines.push(`• ${i.name} ${i.variant}${i.colorLabel ? ' ('+i.colorLabel+')' : ''} x${i.qty} — ${money(i.price*i.qty)}`);
+  });
+  lines.push('');
+  lines.push(`*Total paid:* ${money(Number(result.amount||0)/100)}`);
+  lines.push('Payment confirmed via Paystack ✅');
+  return lines.join('\n');
+}
+
+function sendOrderToWhatsApp(){
+  if(!pendingOrder || !lastPaymentResult){ showToast('Order details are not available.'); return; }
+  const msg = buildWhatsAppOrderMessage(pendingOrder, lastPaymentResult);
+  const url = `https://wa.me/${PUREGLOW_WHATSAPP}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank', 'noopener');
+  fetch('/api/orders/whatsapp-sent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reference:lastPaymentResult.reference})}).catch(()=>{});
+}
+
+function openCheckout(){
+  if(!cart.length){ showToast('Your cart is empty.'); return; }  const subtotal=cartTotal();
+  const total=paystackGross(subtotal);
+  const fee=total-subtotal;
+  document.getElementById('checkoutAmount').textContent=money(total);
+  document.getElementById('checkoutSummarySubtotal').textContent=money(subtotal);
+  document.getElementById('checkoutSummaryFee').textContent=money(fee);
+  document.getElementById('checkoutSummaryTotal').textContent=money(total);
+  document.getElementById('checkoutSummaryItems').innerHTML=cart.map(item=>{ const p=PRODUCTS.find(x=>x.id===item.id); return `<div class="summary-item"><img src="${productImage(p)}" alt=""><div><b>${p.name}</b><small>${p.variant}${p.colorLabel?' · '+p.colorLabel:''} · Qty ${item.qty}</small></div><strong>${money(p.price*item.qty)}</strong></div>`; }).join('');
+  document.getElementById('checkoutModal').classList.add('show');
+  document.getElementById('checkoutModal').setAttribute('aria-hidden','false');
+  prefillCheckout();
+  document.getElementById('customerName').focus();
+}
+function closeCheckout(){ document.getElementById('checkoutModal').classList.remove('show'); document.getElementById('checkoutModal').setAttribute('aria-hidden','true'); }
+
+document.getElementById('checkoutBtn').onclick=openCheckout;
+document.getElementById('checkoutClose').onclick=closeCheckout;
+document.getElementById('checkoutModal').addEventListener('click',e=>{ if(e.target.id==='checkoutModal') closeCheckout(); });
+const deliveryMethodInputs = document.querySelectorAll('input[name="deliveryMethod"]');
+const deliveryFields = document.getElementById('deliveryFields');
+deliveryMethodInputs.forEach(input => input.addEventListener('change', () => {
+  deliveryFields.hidden = input.value !== 'cape-coast-delivery';
+}));
+
+document.getElementById('checkoutForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  if(!cart.length){ closeCheckout(); showToast('Your cart is empty.'); return; }
+  const name=document.getElementById('customerName').value.trim();
+  const email=document.getElementById('customerEmail').value.trim();
+  const phone=document.getElementById('customerPhone').value.trim();
+  const method=document.querySelector('input[name="deliveryMethod"]:checked')?.value || 'collection';
+  const area=document.getElementById('deliveryArea').value.trim();
+  const address=document.getElementById('deliveryAddress').value.trim();
+  const landmark=document.getElementById('deliveryLandmark').value.trim();
+  const mapLink=document.getElementById('deliveryMapLink').value.trim();
+  if(!name || !email || !phone){ showToast('Please complete your details.'); return; }
+  if(method==='cape-coast-delivery' && (!area || !address)){ showToast('Please enter your Cape Coast delivery area and address.'); return; }
+
+  // Snapshot the order now, before the cart is cleared on payment success —
+  // this is what the WhatsApp order message is built from.
+  pendingOrder = {
+    name, email, phone, method, area, address, landmark, mapLink,
+    items: cart.map(item=>{
+      const p=PRODUCTS.find(x=>x.id===item.id);
+      return { name:p.name, variant:p.variant, colorLabel:p.colorLabel||'', qty:item.qty, price:p.price };
+    })
+  };
+
+  const submit=document.querySelector('.checkout-submit');
+  const original=submit.innerHTML;
+  submit.disabled=true;
+  submit.innerHTML='<span>Preparing secure payment…</span>';
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/payments/initialize`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        name,email,phone,
+        items:cart.map(item=>({id:item.id,quantity:item.qty})),
+        delivery:{method, area, address, landmark, mapLink, collectionPoint: method==='collection' ? 'PureGlow Solutions, Kakumdo, Cape Coast' : ''}
+      })
+    });
+    const data = await response.json();
+    if(!response.ok) throw new Error(data.error || 'Could not initialize payment.');
+    closeCheckout();
+    closeCart();
+    if(typeof PaystackPop==='undefined') throw new Error('Paystack could not load. Please refresh and try again.');
+    const popup=new PaystackPop();
+    popup.resumeTransaction(data.access_code);
+    showToast('Payment is ready. Complete the authorization on the Paystack screen.');
+    monitorPayment(data.reference);
+  } catch(error) {
+    showToast(error.message || 'Payment could not be started. Your cart is still saved.');
+  } finally {
+    submit.disabled=false;
+    submit.innerHTML=original;
+  }
+});
+
+
+async function monitorPayment(reference){
+  let attempts=0;
+  const timer=setInterval(async()=>{
+    attempts++;
+    try{
+      const response=await fetch(`${API_BASE_URL}/api/payments/verify?reference=${encodeURIComponent(reference)}`,{cache:'no-store'});
+      const result=await response.json();
+      if(result.status==='success'){
+        clearInterval(timer);
+        cart=[];
+        saveCart();
+        showPaymentSuccess(result);
+      } else if(['failed','abandoned','reversed'].includes(result.status) || attempts>=40){
+        clearInterval(timer);
+      }
+    }catch(_e){
+      if(attempts>=40) clearInterval(timer);
+    }
+  },3000);
+}
+
+function showPaymentSuccess(result){
+  lastPaymentResult = result;
+  const modal=document.getElementById('checkoutModal');
+  modal.classList.add('show');
+  modal.setAttribute('aria-hidden','false');
+  const panel=modal.querySelector('.checkout-panel');
+  if(panel){
+    panel.innerHTML=`<div class="checkout-header"><span class="eyebrow">PAYMENT CONFIRMED</span><h2>Thank you for your order.</h2><p>Your payment was confirmed by Paystack.</p></div><div class="checkout-note" style="margin-top:18px"><span>✓</span><div><b>Payment successful</b><small>Reference: ${String(result.reference).replace(/[<>]/g,'')}</small><small>Amount: ${money(Number(result.amount||0)/100)}</small></div></div><button class="btn btn-whatsapp full" type="button" onclick="sendOrderToWhatsApp()" style="margin-top:14px;background:#25D366;color:#fff;">Send order & delivery location on WhatsApp</button><p style="margin-top:10px;font-size:.82rem;opacity:.7;">WhatsApp opens with your paid order and delivery details already filled in. Tap Send; for a more precise delivery point, you can also share your live location in WhatsApp.</p><button class="btn btn-primary full" type="button" onclick="closeCheckout()" style="margin-top:10px;">Continue shopping</button>`;
+  }
+  // Best-effort automatic open — browsers often block a new tab opened from
+  // code that isn't a direct click, so the button above is the guaranteed path.
+  try { sendOrderToWhatsApp(); } catch(_e) {}
+}
+
+let currentUser = null;
+
+const accountModal = document.getElementById('accountModal');
+const accountAuthView = document.getElementById('accountAuthView');
+const accountDashboard = document.getElementById('accountDashboard');
+const accountButtonText = document.getElementById('accountButtonText');
+
+function setAccountView(view){
+  accountAuthView.hidden = view !== 'auth';
+  accountDashboard.hidden = view !== 'dashboard';
+}
+
+function openAccount(){
+  accountModal.classList.add('show');
+  accountModal.setAttribute('aria-hidden','false');
+  if(currentUser) showAccountDashboard();
+  else showAuthTab('login');
+}
+function closeAccount(){
+  accountModal.classList.remove('show');
+  accountModal.setAttribute('aria-hidden','true');
+}
+function showAuthTab(tab){
+  setAccountView('auth');
+  document.querySelectorAll('.account-tab').forEach(b=>b.classList.toggle('active', b.dataset.accountTab===tab));
+  document.getElementById('loginForm').hidden = tab !== 'login';
+  document.getElementById('signupForm').hidden = tab !== 'signup';
+  document.getElementById('loginError').textContent='';
+  document.getElementById('signupError').textContent='';
+}
+function showAccountDashboard(){
+  setAccountView('dashboard');
+  document.getElementById('accountWelcome').textContent = `Welcome, ${currentUser.name.split(' ')[0]}.`;
+  document.getElementById('accountName').textContent = currentUser.name;
+  document.getElementById('accountEmail').textContent = currentUser.email;
+  document.getElementById('accountPhone').textContent = currentUser.phone || '—';
+}
+function updateAccountButton(){
+  accountButtonText.textContent = currentUser ? 'My account' : 'Sign up / Log in';
+}
+function prefillCheckout(){
+  if(!currentUser) return;
+  const name = document.getElementById('customerName');
+  const email = document.getElementById('customerEmail');
+  const phone = document.getElementById('customerPhone');
+  if(name && !name.value) name.value=currentUser.name;
+  if(email && !email.value) email.value=currentUser.email;
+  if(phone && !phone.value) phone.value=currentUser.phone || '';
+}
+async function loadCurrentUser(){
+  try{
+    const response = await fetch('/api/auth?action=me',{cache:'no-store'});
+    if(!response.ok) return;
+    const data = await response.json();
+    if(data.authenticated && data.user){
+      currentUser=data.user;
+      updateAccountButton();
+    }
+  }catch(_e){}
+}
+
+document.getElementById('accountOpen').onclick=openAccount;
+document.getElementById('accountClose').onclick=closeAccount;
+accountModal.addEventListener('click',e=>{ if(e.target===accountModal) closeAccount(); });
+document.querySelectorAll('.account-tab').forEach(btn=>btn.addEventListener('click',()=>showAuthTab(btn.dataset.accountTab)));
+document.getElementById('accountShopBtn').onclick=closeAccount;
+
+document.getElementById('loginForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const error=document.getElementById('loginError'); error.textContent='';
+  const button=e.target.querySelector('button[type="submit"]');
+  const original=button.textContent; button.disabled=true; button.textContent='Logging in…';
+  try{
+    const response=await fetch('/api/auth?action=login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:document.getElementById('loginEmail').value,password:document.getElementById('loginPassword').value})});
+    const data=await response.json();
+    if(!response.ok) throw new Error(data.error||'Could not log in.');
+    currentUser=data.user; updateAccountButton(); showAccountDashboard(); prefillCheckout(); showToast('Welcome back!');
+  }catch(err){ error.textContent=err.message; }
+  finally{ button.disabled=false; button.textContent=original; }
+});
+
+document.getElementById('signupForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const error=document.getElementById('signupError'); error.textContent='';
+  const password=document.getElementById('signupPassword').value;
+  const confirm=document.getElementById('signupPassword2').value;
+  if(password!==confirm){ error.textContent='The passwords do not match.'; return; }
+  const button=e.target.querySelector('button[type="submit"]');
+  const original=button.textContent; button.disabled=true; button.textContent='Creating account…';
+  try{
+    const response=await fetch('/api/auth?action=signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:document.getElementById('signupName').value,email:document.getElementById('signupEmail').value,phone:document.getElementById('signupPhone').value,password})});
+    const data=await response.json();
+    if(!response.ok) throw new Error(data.error||'Could not create your account.');
+    currentUser=data.user; updateAccountButton(); showAccountDashboard(); prefillCheckout(); showToast('Account created successfully!');
+  }catch(err){ error.textContent=err.message; }
+  finally{ button.disabled=false; button.textContent=original; }
+});
+
+document.getElementById('accountLogoutBtn').onclick=async()=>{
+  try{ await fetch('/api/auth?action=logout',{method:'POST'}); }catch(_e){}
+  currentUser=null; updateAccountButton(); showAuthTab('login'); closeAccount(); showToast('You have been logged out.');
+};
+
+loadCurrentUser();
+
+document.querySelectorAll('.category-card').forEach(btn=>btn.addEventListener('click',()=>{
+  activeCategory=btn.dataset.category;
+  document.querySelectorAll('.category-card').forEach(x=>x.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts();
+  document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+}));
+
+renderProducts();
+renderCart();
+
+// Hero "behind" image slideshow — cross-fades to the next image every 5s.
+(function(){
+  const slides = document.querySelectorAll('#heroSlideshow .hero-slide');
+  const dots = document.querySelectorAll('#heroSlideshowDots span');
+  if(!slides.length) return;
+  let idx = Array.from(slides).findIndex(s=>s.classList.contains('is-active'));
+  if(idx < 0) idx = 0;
+  setInterval(()=>{
+    slides[idx].classList.remove('is-active');
+    if(dots[idx]) dots[idx].classList.remove('is-active');
+    idx = (idx + 1) % slides.length;
+    slides[idx].classList.add('is-active');
+    if(dots[idx]) dots[idx].classList.add('is-active');
+  }, 5000);
+})();
+</script>
+</body>
+</html>

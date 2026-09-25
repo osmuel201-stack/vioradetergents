@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: pureglow-solutions
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PAYSTACK_SECRET_KEY
+        sync: false
+      - key: AUTH_SESSION_SECRET
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: PUREGLOW_WHATSAPP
+        value: "233597601733"
