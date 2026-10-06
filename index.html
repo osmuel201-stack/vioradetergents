@@ -281,7 +281,7 @@
       <form id="checkoutForm" class="checkout-form">
         <label>Full name<input id="customerName" name="name" type="text" autocomplete="name" placeholder="Your full name" required></label>
         <label>Email address<input id="customerEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
-        <label>WhatsApp / phone number<input id="customerPhone" name="phone" type="tel" autocomplete="tel" placeholder="024 XXX XXXX" required></label>
+        <label>Phone number<input id="customerPhone" name="phone" type="tel" autocomplete="tel" placeholder="024 XXX XXXX" required></label>
         <fieldset class="delivery-options"><legend>Order fulfilment</legend>
           <label class="radio-row"><input type="radio" name="deliveryMethod" value="collection" checked><span><b>Collection</b><small>PureGlow Solutions, Kakumdo, Cape Coast</small></span></label>
           <label class="radio-row"><input type="radio" name="deliveryMethod" value="cape-coast-delivery"><span><b>Cape Coast delivery</b><small>Provide the location where you want your order delivered.</small></span></label>
@@ -462,7 +462,6 @@ function cartTotal(){ return cart.reduce((sum,item)=>{ const p=PRODUCTS.find(x=>
 // Paystack's current Ghana local transaction fee is 1.95%.
 // The customer pays the grossed-up amount so the product subtotal is protected from the fee.
 const PAYSTACK_FEE_RATE = 0.0195;
-const PUREGLOW_WHATSAPP = '233597601733'; // 0597 601 733 in international format, no leading 0/+
 let pendingOrder = null;
 let lastPaymentResult = null;
 
@@ -471,42 +470,16 @@ function paystackGross(net){
   return Math.round(((net / (1 - PAYSTACK_FEE_RATE)) + 0.01) * 100) / 100;
 }
 
-function buildWhatsAppOrderMessage(order, result){
-  const lines = [];
-  lines.push('🧼 *New PureGlow Solutions order — Paid*');
-  lines.push(`Ref: ${result.reference}`);
-  lines.push('');
-  lines.push(`*Customer:* ${order.name}`);
-  lines.push(`*Phone:* ${order.phone}`);
-  lines.push(`*Email:* ${order.email}`);
-  lines.push('');
-  if(order.method === 'cape-coast-delivery'){
-    lines.push('*Fulfilment:* Cape Coast delivery');
-    lines.push(`*Area:* ${order.area}`);
-    lines.push(`*Address:* ${order.address}`);
-    if(order.landmark) lines.push(`*Landmark:* ${order.landmark}`);
-    if(order.mapLink) lines.push(`*Google Maps:* ${order.mapLink}`);
-    lines.push('Please use this delivery location for the order. If needed, I can also share my live WhatsApp location.');
-  } else {
-    lines.push('*Fulfilment:* Pickup — PureGlow Solutions, Kakumdo, Cape Coast');
-  }
-  lines.push('');
-  lines.push('*Items:*');
-  order.items.forEach(i=>{
-    lines.push(`• ${i.name} ${i.variant}${i.colorLabel ? ' ('+i.colorLabel+')' : ''} x${i.qty} — ${money(i.price*i.qty)}`);
-  });
-  lines.push('');
-  lines.push(`*Total paid:* ${money(Number(result.amount||0)/100)}`);
-  lines.push('Payment confirmed via Paystack ✅');
-  return lines.join('\n');
-}
-
-function sendOrderToWhatsApp(){
-  if(!pendingOrder || !lastPaymentResult){ showToast('Order details are not available.'); return; }
-  const msg = buildWhatsAppOrderMessage(pendingOrder, lastPaymentResult);
-  const url = `https://wa.me/${PUREGLOW_WHATSAPP}?text=${encodeURIComponent(msg)}`;
-  window.open(url, '_blank', 'noopener');
-  fetch('/api/orders/whatsapp-sent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reference:lastPaymentResult.reference})}).catch(()=>{});
+async function resendOrderEmail(){
+  if(!lastPaymentResult) return;
+  const btn=document.getElementById('resendEmailBtn'), note=document.getElementById('emailStatusNote');
+  if(btn){ btn.disabled=true; btn.textContent='Sending…'; }
+  try{
+    const r=await fetch('/api/orders/resend-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reference:lastPaymentResult.reference})});
+    const d=await r.json();
+    if(note) note.textContent = d.ok ? 'Confirmation email sent. Please check your inbox (and spam folder).' : 'We could not send the email right now. Your order is saved — please call or WhatsApp 0597601733.';
+  }catch(_e){ if(note) note.textContent='We could not send the email right now. Your order is saved — please call or WhatsApp 0597601733.'; }
+  if(btn){ btn.disabled=false; btn.textContent='Resend confirmation email'; }
 }
 
 function openCheckout(){
@@ -549,7 +522,7 @@ document.getElementById('checkoutForm').addEventListener('submit', async e=>{
   if(method==='cape-coast-delivery' && (!area || !address)){ showToast('Please enter your Cape Coast delivery area and address.'); return; }
 
   // Snapshot the order now, before the cart is cleared on payment success —
-  // this is what the WhatsApp order message is built from.
+  // used by the confirmation screen.
   pendingOrder = {
     name, email, phone, method, area, address, landmark, mapLink,
     items: cart.map(item=>{
@@ -578,8 +551,12 @@ document.getElementById('checkoutForm').addEventListener('submit', async e=>{
     closeCheckout();
     closeCart();
     if(typeof PaystackPop==='undefined') throw new Error('Paystack could not load. Please refresh and try again.');
+    try{ localStorage.setItem('pg_pending',JSON.stringify({reference:data.reference,order:pendingOrder,t:Date.now()})); }catch(_e){}
     const popup=new PaystackPop();
-    popup.resumeTransaction(data.access_code);
+    popup.resumeTransaction(data.access_code,{
+      onSuccess:()=>monitorPayment(data.reference),
+      onCancel:()=>{}
+    });
     showToast('Payment is ready. Complete the authorization on the Paystack screen.');
     monitorPayment(data.reference);
   } catch(error) {
@@ -591,25 +568,39 @@ document.getElementById('checkoutForm').addEventListener('submit', async e=>{
 });
 
 
-async function monitorPayment(reference){
+let paymentTimer=null;
+async function checkPayment(reference){
+  const response=await fetch(`${API_BASE_URL}/api/payments/verify?reference=${encodeURIComponent(reference)}`,{cache:'no-store'});
+  return response.json();
+}
+function paymentDone(result){
+  if(paymentTimer){ clearInterval(paymentTimer); paymentTimer=null; }
+  cart=[]; saveCart();
+  try{ localStorage.removeItem('pg_pending'); }catch(_e){}
+  showPaymentSuccess(result);
+}
+// Watches a payment for up to ~10 minutes (MoMo approvals can be slow).
+function monitorPayment(reference){
+  if(paymentTimer) clearInterval(paymentTimer);
   let attempts=0;
-  const timer=setInterval(async()=>{
+  paymentTimer=setInterval(async()=>{
     attempts++;
     try{
-      const response=await fetch(`${API_BASE_URL}/api/payments/verify?reference=${encodeURIComponent(reference)}`,{cache:'no-store'});
-      const result=await response.json();
-      if(result.status==='success'){
-        clearInterval(timer);
-        cart=[];
-        saveCart();
-        showPaymentSuccess(result);
-      } else if(['failed','abandoned','reversed'].includes(result.status) || attempts>=40){
-        clearInterval(timer);
-      }
+      const result=await checkPayment(reference);
+      if(result.status==='success'){ paymentDone(result); }
+      else if(['failed','abandoned','reversed'].includes(result.status) || attempts>=200){ clearInterval(paymentTimer); paymentTimer=null; }
     }catch(_e){
-      if(attempts>=40) clearInterval(timer);
+      if(attempts>=200){ clearInterval(paymentTimer); paymentTimer=null; }
     }
   },3000);
+}
+// One-off check, used to recover a payment after a reload or from a ?ref= link.
+async function recoverPayment(reference){
+  try{
+    const result=await checkPayment(reference);
+    if(result.status==='success') paymentDone(result);
+    else try{ localStorage.removeItem('pg_pending'); }catch(_e){}
+  }catch(_e){}
 }
 
 function showPaymentSuccess(result){
@@ -618,12 +609,15 @@ function showPaymentSuccess(result){
   modal.classList.add('show');
   modal.setAttribute('aria-hidden','false');
   const panel=modal.querySelector('.checkout-panel');
+  const safe=v=>String(v||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const email=safe(result.email || (pendingOrder&&pendingOrder.email));
+  const sent=result.emailStatus==='sent';
+  const msg=sent
+    ? `A confirmation with your order details has been sent to <b>${email}</b>. Please check your inbox (and spam folder).`
+    : `Your order is saved. We could not send the confirmation email to <b>${email}</b> yet — tap the button below to try again.`;
   if(panel){
-    panel.innerHTML=`<div class="checkout-header"><span class="eyebrow">PAYMENT CONFIRMED</span><h2>Thank you for your order.</h2><p>Your payment was confirmed by Paystack.</p></div><div class="checkout-note" style="margin-top:18px"><span>✓</span><div><b>Payment successful</b><small>Reference: ${String(result.reference).replace(/[<>]/g,'')}</small><small>Amount: ${money(Number(result.amount||0)/100)}</small></div></div><button class="btn btn-whatsapp full" type="button" onclick="sendOrderToWhatsApp()" style="margin-top:14px;background:#25D366;color:#fff;">Send order & delivery location on WhatsApp</button><p style="margin-top:10px;font-size:.82rem;opacity:.7;">WhatsApp opens with your paid order and delivery details already filled in. Tap Send; for a more precise delivery point, you can also share your live location in WhatsApp.</p><button class="btn btn-primary full" type="button" onclick="closeCheckout()" style="margin-top:10px;">Continue shopping</button>`;
+    panel.innerHTML=`<div class="checkout-header"><span class="eyebrow">PAYMENT CONFIRMED</span><h2>Thank you for your order.</h2><p>Your payment was confirmed by Paystack.</p></div><div class="checkout-note" style="margin-top:18px"><span>✓</span><div><b>Payment successful</b><small>Reference: ${safe(result.reference)}</small><small>Amount: ${money(Number(result.amount||0)/100)}</small></div></div><p id="emailStatusNote" style="margin-top:14px;font-size:.92rem;">${msg}</p>${sent?'':'<button id="resendEmailBtn" class="btn btn-primary full" type="button" onclick="resendOrderEmail()" style="margin-top:10px;">Resend confirmation email</button>'}<button class="btn ${sent?'btn-primary':'btn-light'} full" type="button" onclick="closeCheckout()" style="margin-top:10px;">Continue shopping</button>`;
   }
-  // Best-effort automatic open — browsers often block a new tab opened from
-  // code that isn't a direct click, so the button above is the guaranteed path.
-  try { sendOrderToWhatsApp(); } catch(_e) {}
 }
 
 let currentUser = null;
@@ -756,6 +750,20 @@ renderCart();
     slides[idx].classList.add('is-active');
     if(dots[idx]) dots[idx].classList.add('is-active');
   }, 5000);
+})();
+
+// On every page load: confirm any payment that was started but not confirmed (closed tab, slow MoMo),
+// or one opened with ?ref=PGS-XXXX in the address.
+(function(){
+  try{
+    const urlRef=new URLSearchParams(location.search).get('ref');
+    if(urlRef){ recoverPayment(urlRef.trim()); return; }
+    const raw=localStorage.getItem('pg_pending'); if(!raw) return;
+    const p=JSON.parse(raw);
+    if(!p||!p.reference) return;
+    if(p.order) pendingOrder=p.order;
+    if(Date.now()-p.t<15*60*1000) monitorPayment(p.reference); else recoverPayment(p.reference);
+  }catch(_e){}
 })();
 </script>
 </body>

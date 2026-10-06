@@ -1,12 +1,12 @@
 {
   "name": "pureglow-solutions-site",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
-  "description": "PureGlow Solutions storefront with Render backend, Paystack payments, customer accounts and WhatsApp order handoff.",
+  "description": "PureGlow Solutions storefront: Render server, Paystack payments, Supabase database, email order confirmations.",
   "scripts": {"start": "node server.js"},
   "engines": {"node": ">=18"},
   "dependencies": {
-    "express": "^4.21.2",
-    "pg": "^8.13.1"
+    "@supabase/supabase-js": "^2.45.0",
+    "express": "^4.21.2"
   }
 }

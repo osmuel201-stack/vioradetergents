@@ -9,7 +9,15 @@ services:
         sync: false
       - key: AUTH_SESSION_SECRET
         sync: false
-      - key: DATABASE_URL
+      - key: SUPABASE_URL
         sync: false
-      - key: PUREGLOW_WHATSAPP
-        value: "233597601733"
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: BREVO_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: EMAIL_FROM_NAME
+        value: "PureGlow Solutions"
+      - key: BUSINESS_EMAIL
+        value: "Pureglowsoltions25@gmail.com"
